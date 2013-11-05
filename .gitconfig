@@ -1,0 +1,47 @@
+[color]
+	ui = auto
+[user]
+	name = Dominik Menzi
+	email = dominik.menzi@inventage.com
+[core]
+	editor = emacs -nw
+	quotepath = false
+[log]
+	date = local
+[alias]
+	la = "!git config -l | grep ^alias. | cut -c 7-"
+	sci = svn dcommit --no-rebase
+	ai = add -i
+	br = branch
+	cia = commit --amend
+	ci = commit
+	co = checkout
+	co1 = checkout HEAD^
+	co2 = checkout HEAD^^
+	cp = cherry-pick
+	done = !export BR=$(git rev-parse --abbrev-ref HEAD) && git checkout master && git rebase trunk && git branch -d ${BR}
+	rb = rebase
+	rba = rebase --abort
+	rbc = rebase --continue
+	rbi = rebase --interactive
+	r = reset
+	r1 = reset HEAD^
+	r2 = reset HEAD^^
+	rh = reset --hard
+	s = status -sb
+	st = status
+	start = checkout trunk -b
+	wdiff = diff --word-diff
+[push]
+	default = upstream
+[svn]
+	rmdir = true
+[tig]
+	tab-size = 4
+	line-graphics = utf-8
+	show-date = local
+[tig "color"]
+	date = magenta default
+	diff-stat = yellow default
+[tig "bind"]
+	main = T !git tag %(prompt) %(commit)
