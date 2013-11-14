@@ -30,7 +30,7 @@
 	rh = reset --hard
 	s = status -sb
 	st = status
-	start = checkout trunk -b
+	start = checkout master -b
 	wdiff = diff --word-diff
 [push]
 	default = upstream
