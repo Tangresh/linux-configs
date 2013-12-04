@@ -32,6 +32,8 @@
 	st = status
 	start = checkout master -b
 	wdiff = diff --word-diff
+[pull]
+	rebase = preserve
 [push]
 	default = upstream
 [svn]
