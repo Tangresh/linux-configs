@@ -1,6 +1,7 @@
 # git aliases
 alias tiga="tig --all"
 alias gitka="gitk --all &"
+alias qgita="qgit --all &"
 alias gst="git status"
 alias gai="git add -i"
 alias gci="git commit"
