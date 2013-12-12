@@ -32,6 +32,8 @@
 	st = status
 	start = checkout master -b
 	wdiff = diff --word-diff
+[merge]
+	ff = false
 [pull]
 	rebase = preserve
 [push]
