@@ -34,6 +34,7 @@
 	wdiff = diff --word-diff
 [merge]
 	ff = false
+	conflictstyle = diff3
 [pull]
 	rebase = preserve
 [push]
