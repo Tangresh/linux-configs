@@ -21,9 +21,9 @@
 	cp = cherry-pick
 	done = !export BR=$(git rev-parse --abbrev-ref HEAD) && git checkout master && git rebase trunk --preserve-merges && git branch -d ${BR}
 	rb = rebase --preserve-merges
-	rba = rebase --preserve-merges --abort
-	rbc = rebase --preserve-merges --continue
-	rbi = rebase --preserve-merges --interactive
+	rba = rebase --abort
+	rbc = rebase --continue
+	rbi = rebase --interactive
 	r = reset
 	r1 = reset HEAD^
 	r2 = reset HEAD^^
