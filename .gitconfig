@@ -21,6 +21,7 @@
 	cp = cherry-pick
 	done = !export BR=$(git rev-parse --abbrev-ref HEAD) && git checkout master && git rebase trunk --preserve-merges && git branch -d ${BR}
 	ff = merge --ff
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
 	rb = rebase --preserve-merges
 	rba = rebase --abort
 	rbc = rebase --continue
