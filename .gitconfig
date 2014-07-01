@@ -4,7 +4,7 @@
 	name = Dominik Menzi
 	email = dominik.menzi@inventage.com
 [core]
-	editor = emacsclient -c
+	editor = emacs -nw
 	quotepath = false
 [log]
 	date = local

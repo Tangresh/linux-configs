@@ -1,12 +1,8 @@
 bind "set completion-ignore-case on"
 
-export ALTERNATE_EDITOR=""
-
-alias e="emacsclient -t"
-alias ew="emacsclient -c -n"
+alias e="emacs -nw"
+alias ew="emacs"
 
 manpdf(){
   man -t "$1" | ps2pdf - "$1.pdf"
 }
-
-
