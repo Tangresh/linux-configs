@@ -19,7 +19,8 @@
 ;; 'face for more color
 (setq whitespace-style '(face tabs spaces trailing lines space-before-tab indentation empty space-after-tab space-mark tab-mark newline))
 (setq whitespace-line 0)
-;(set-face-attribute 'whitespace-space nil :background nil :foreground "gray30")
+(set-face-attribute 'whitespace-space nil :background nil :foreground "orange")
+(set-face-attribute 'whitespace-tab nil :background nil :foreground "orange")
 
 (add-hook 'c-mode-hook (lambda () (interactive) (column-marker-1 80)))
 (add-hook 'LaTeX-mode-hook (lambda () (interactive) (column-marker-1 120)))
@@ -110,4 +111,4 @@
 (setq-default TeX-master nil)
 (add-hook 'TeX-language-de-hook
 	(lambda () (ispell-change-dictionary "german"))) ; using "\usepackage[german]{babel}" in your latex file will activate this style.
-(add-hook 'latex-mode-hook 'turn-on-reftex) ; 
+(add-hook 'latex-mode-hook 'turn-on-reftex) ;
