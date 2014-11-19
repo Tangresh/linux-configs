@@ -19,7 +19,7 @@
 	co1 = checkout HEAD^
 	co2 = checkout HEAD^^
 	cp = cherry-pick
-	done = !export BR=$(git rev-parse --abbrev-ref HEAD) && git checkout master && (git rebase trunk --preserve-merges || git rebase --preserve-merges) && git branch -d ${BR}
+	done = !export BR=$(git rev-parse --abbrev-ref HEAD) && UP=$(git config workflow.upstream) && git checkout master && (git rebase ${UP} --preserve-merges || git rebase --preserve-merges) && git branch -d ${BR}
 	ff = merge --ff
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
 	rb = rebase --preserve-merges
@@ -32,7 +32,7 @@
 	rh = reset --hard
 	s = status -sb
 	st = status
-	start = checkout master -b
+	start = !git checkout $(git config workflow.upstream) -b
 	wdiff = diff --word-diff
 [merge]
 	ff = false
@@ -52,3 +52,5 @@
 	diff-stat = yellow default
 [tig "bind"]
 	main = T !git tag %(prompt) %(commit)
+[workflow]
+	upstream = origin/master
