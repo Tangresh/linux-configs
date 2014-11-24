@@ -21,6 +21,7 @@
 	cp = cherry-pick
 	done = !export BR=$(git rev-parse --abbrev-ref HEAD) && UP=$(git config workflow.upstream) && git checkout master && (git rebase ${UP} --preserve-merges || git rebase --preserve-merges) && git branch -d ${BR}
 	ff = merge --ff
+	ign = ls-files -o -i --exclude-standard
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
 	rb = rebase --preserve-merges
 	rba = rebase --abort
