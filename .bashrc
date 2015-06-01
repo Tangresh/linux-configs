@@ -18,7 +18,8 @@ fi
 
 bind "set completion-ignore-case on"
 
-export SVN_EDITOR="emacs -nw"
+export EDITOR="emacs -nw"
+export SVN_EDITOR=$EDITOR
 
 manpdf(){
   man -t "$1" | ps2pdf - "$1.pdf"
