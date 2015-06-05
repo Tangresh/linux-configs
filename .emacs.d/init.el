@@ -33,6 +33,19 @@
   ;; If there is more than one, they won't work right.
  '(default ((t (:stipple nil :background "#ffffff" :foreground "#000000" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 90 :width normal :family "adobe-courier")))))
 
+;;;;;;;;;;;;;;;;;;;;
+;; BEGIN org-mode ;;
+
+(add-hook 'org-mode-hook
+		  (lambda ()
+			(global-set-key (kbd "M-[ 1 ; 1 C") 'org-metaright) ; This is actually AltGr-arrowright
+			(global-set-key (kbd "M-[ 1 ; 1 D") 'org-metaleft) ; This is actually AltGr-arrowleft
+			)
+		  )
+
+;; END org-mode
+;;;;;;;;;;;;;;;;
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Legacy ;;;;;;;;;;;;;;;;;;
