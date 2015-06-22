@@ -6,6 +6,12 @@
 
 (ido-mode t)
 
+(add-hook 'c-mode-hook (lambda () (interactive) (column-marker-1 80)))
+(add-hook 'LaTeX-mode-hook (lambda () (interactive) (column-marker-1 120)))
+
+;;;;;;;;;;;;;;;;
+;; BEGIN styling
+
 ;; Color theme
 ;(color-theme-initialize)
 ;(color-theme-calm-forest)
@@ -14,16 +20,8 @@
 (setq show-paren-style 'mixed)
 (setq line-number-mode t)
 (setq column-number-mode t)
-
-(global-whitespace-mode t)
-;; 'face for more color
-(setq whitespace-style '(face tabs spaces trailing lines space-before-tab indentation empty space-after-tab space-mark tab-mark newline))
-(setq whitespace-line 0)
-(set-face-attribute 'whitespace-space nil :background nil :foreground "orange")
-(set-face-attribute 'whitespace-tab nil :background nil :foreground "orange")
-
-(add-hook 'c-mode-hook (lambda () (interactive) (column-marker-1 80)))
-(add-hook 'LaTeX-mode-hook (lambda () (interactive) (column-marker-1 120)))
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
 
 (setq inhibit-startup-message t)
 (custom-set-faces
@@ -33,31 +31,46 @@
   ;; If there is more than one, they won't work right.
  '(default ((t (:stipple nil :background "#ffffff" :foreground "#000000" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 90 :width normal :family "adobe-courier")))))
 
-;;;;;;;;;;;;;;;;;;;;
-;; BEGIN org-mode ;;
+(global-whitespace-mode t)
+;; 'face for more color
+(setq whitespace-style '(face tabs spaces trailing lines space-before-tab indentation empty space-after-tab space-mark tab-mark newline))
+(setq whitespace-line 0)
+(set-face-attribute 'whitespace-space nil :background nil :foreground "orange")
+(set-face-attribute 'whitespace-tab nil :background nil :foreground "orange")
+
+;; END styling ;;
+;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;
+;; BEGIN org-mode
 
 (add-hook 'org-mode-hook
-		  (lambda ()
-			(global-set-key (kbd "M-[ 1 ; 1 C") 'org-metaright) ; This is actually AltGr-arrowright
-			(global-set-key (kbd "M-[ 1 ; 1 D") 'org-metaleft) ; This is actually AltGr-arrowleft
-			)
-		  )
+          (lambda ()
+            (global-set-key (kbd "M-[ 1 ; 1 C") 'org-metaright) ; This is actually AltGr-arrowright
+            (global-set-key (kbd "M-[ 1 ; 1 D") 'org-metaleft) ; This is actually AltGr-arrowleft
+            )
+          )
+
+(defun todo ()
+  (interactive)
+  (find-file "/home/tangresh/TODO/main.org")
+  )
 
 ;; END org-mode
-;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Legacy ;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq c-basic-offset '4
-	cmake-tab-width 4
-	indent-tabs-mode t)
+      cmake-tab-width 4
+      indent-tabs-mode t)
 (setq default-tab-width '4)
 (add-hook 'html-mode-hook
-		  (lambda()
-			(setq sgml-basic-offset 4)
-			(setq indent-tabs-mode t)))
+          (lambda()
+            (setq sgml-basic-offset 4)
+            (setq indent-tabs-mode t)))
 ;; (global-set-key (kbd "TAB") 'self-insert-command);	;; make the tab key insert EXACTLY ONE a tab character
 ;; (global-set-key (kbd "TAB") 'tab-to-tab-stop);	;; use real tabs only, no spaces
 ;(setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))
@@ -66,10 +79,10 @@
 (setq auto-mode-alist (cons '("\\.php\\'" . text-mode) auto-mode-alist))
 
 (setq c-default-style '((java . "java")
-	(awk-mode . "awk")
-	(other . "k&r"))) ;; set indentation style in cc-mode
+                        (awk-mode . "awk")
+                        (other . "k&r"))) ;; set indentation style in cc-mode
 (defun my-make-CR-do-indent ()
-	(define-key c-mode-base-map "\C-m" 'c-context-line-break))
+  (define-key c-mode-base-map "\C-m" 'c-context-line-break))
 ;; (add-hook 'c-initialization-hook 'my-make-CR-do-indent) ;; make RET indent the new line
 
 ;; enable auto completion with cedet
@@ -107,10 +120,10 @@
 (setq auto-mode-alist (cons '("\\.m\\'" . matlab-mode) auto-mode-alist))
 (autoload 'matlab-shell "matlab" "Interactive MATLAB mode." t)
 ;; Customization:
-(setq matlab-indent-function t)	; if you want function bodies indented
+(setq matlab-indent-function t)     ; if you want function bodies indented
 (setq matlab-verify-on-save-flag nil) ; turn off auto-verify on save
 (defun my-matlab-mode-hook ()
-  (setq fill-column 76))		; where auto-fill should wrap
+  (setq fill-column 76))        ; where auto-fill should wrap
 (add-hook 'matlab-mode-hook 'my-matlab-mode-hook)
 (defun my-matlab-shell-mode-hook ()
   '())
@@ -123,5 +136,6 @@
 (setq TeX-parse-self t)
 (setq-default TeX-master nil)
 (add-hook 'TeX-language-de-hook
-	(lambda () (ispell-change-dictionary "german"))) ; using "\usepackage[german]{babel}" in your latex file will activate this style.
+          (lambda ()
+            (ispell-change-dictionary "german"))) ; using "\usepackage[german]{babel}" in your latex file will activate this style.
 (add-hook 'latex-mode-hook 'turn-on-reftex) ;
