@@ -10,45 +10,81 @@ alias gsr="git svn rebase"
 alias gsf="git svn fetch"
 
 cStdBranch=${LIGHT_YELLOW}
-cChanges=${GREEN}
-cUnstaged=${RED}
+cTrackBranch=${LIGHT_GRAY}
+cTrackStatus=${YELLOW}
+cChanges=${LIGHT_GREEN}
+cUnstaged=${LIGHT_RED}
 
-function parse_git_branch {
-	git rev-parse --git-dir &> /dev/null
-	git_status="$(git status 2> /dev/null)"
-	branch_pattern="^On branch ([^${IFS}]*)"
-	detached_branch_pattern="# Not currently on any branch"
-	ahead_pattern="Your branch is ahead of"
-	behind_pattern="Your branch is behind"
-	diverge_pattern="Your branch and (.*) have diverged"
+function parse_git_branch() {
+    branch_pattern="^On branch ([^${IFS}]*)"
+    detached_branch_pattern="# Not currently on any branch"
+    uptodate_pattern="Your branch is up-to-date with '(.*)'"
+    ahead_pattern="Your branch is ahead of '(.*)' by ([0-9]+) commit"
+    behind_pattern="Your branch is behind '(.*)' by ([0-9]+) commit"
+    diverge_pattern="Your branch and '(.*)' have diverged,"
+    diverge_pattern2="and have ([0-9]+) and ([0-9]+)"
 
-	if [[ ${git_status}} =~ "Changes to be committed" ]]; then
-		state="${cChanges}⚡"
-	fi
-	if [[ ${git_status}} =~ "Changes not staged for commit" ]]; then
-		state=${state}"${cUnstaged}⚡"
-	fi
-	# add an else if or two here if you want to get more specific
-	if [[ ${git_status} =~ ${ahead_pattern} ]]; then
-		remote="${cStdBranch}↑"
-	fi
-	if [[ ${git_status} =~ ${behind_pattern} ]]; then
-		remote="${cStdBranch}↓"
-	fi
-	if [[ ${git_status} =~ ${diverge_pattern} ]]; then
-		remote="${cStdBranch}↕"
-	fi
-	if [[ ${git_status} =~ ${branch_pattern} ]]; then
-		branch=${cStdBranch}"("${BASH_REMATCH[1]}")"
-	elif [[ ${git_status} =~ ${detached_branch_pattern} ]]; then
-		branch="${cStdBranch}NO BRANCH"
-	fi
+    declare -a parts=()
+    declare branch=""
+    declare upstream=""
+    declare -i numAhead=0
+    declare -i numBehind=0
 
-	if [[ ${#state} -gt "0" || ${#remote} -gt "0" ]]; then
-		s=" "
-	fi
+#    git rev-parse --git-dir &> /dev/null
+    git_status="$(git status 2> /dev/null)"
 
-	echo "${branch}${s}${remote}${state}"
+    if [[ ${git_status} =~ ${branch_pattern} ]]; then
+        branch=${BASH_REMATCH[1]}
+        branchPart=${cStdBranch}"(${branch})"
+    elif [[ ${git_status} =~ ${detached_branchPart_pattern} ]]; then
+        branchPart="${cStdBranchPart}NO BRANCHPART"
+    fi
+    parts+=($branchPart)
+
+    declare aheadPart=${cTrackStatus}0
+    declare behindPart=${cTrackStatus}0
+    # add an else if or two here if you want to get more specific
+    if [[ ${git_status} =~ ${uptodate_pattern} ]]; then
+        upstream=${BASH_REMATCH[1]}
+    fi
+    if [[ ${git_status} =~ ${ahead_pattern} ]]; then
+        upstream=${BASH_REMATCH[1]}
+        numAhead=${BASH_REMATCH[2]}
+        aheadPart=${GREEN}↑${numAhead}
+    fi
+    if [[ ${git_status} =~ ${behind_pattern} ]]; then
+        upstream=${BASH_REMATCH[1]}
+        numBehind=${BASH_REMATCH[2]}
+        behindPart=${LIGHT_RED}↓${numBehind}
+    fi
+    if [[ ${git_status} =~ ${diverge_pattern} ]]; then
+        upstream=${BASH_REMATCH[1]}
+        if [[ ${git_status} =~ ${diverge_pattern2} ]]; then
+            numAhead=${BASH_REMATCH[1]}
+            numBehind=${BASH_REMATCH[2]}
+        fi
+        aheadPart=${GREEN}↑${numAhead}
+        behindPart=${LIGHT_RED}↓${numBehind}
+    fi
+    if [[ ${#upstream} -gt 0 ]]; then
+        printf -v remotePart "${cTrackBranch}[%s]${cTrackStatus}(${cTrackStatus}%s${cTrackStatus}/%s${cTrackStatus})" $upstream $aheadPart $behindPart
+        parts+=(${remotePart})
+    fi
+
+    if [[ ${git_status} =~ "Changes to be committed" ]]; then
+        statePart="${cChanges}⚡"
+    fi
+    if [[ ${git_status} =~ "Changes not staged for commit" ]]; then
+        statePart=${state}"${cUnstaged}⚡"
+    fi
+    parts+=($statePart)
+
+    if [[ ${#statePart} -gt "0" || ${#remotePart} -gt "0" ]]; then
+        s=" "
+    fi
+
+    printf -v parts "%s " "${parts[@]}"
+    echo ${parts:0:-1}
 }
 
 
