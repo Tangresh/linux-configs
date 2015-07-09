@@ -9,6 +9,10 @@ alias gai="git add -i"
 alias gsr="git svn rebase"
 alias gsf="git svn fetch"
 
+cStdBranch=${LIGHT_YELLOW}
+cChanges=${GREEN}
+cUnstaged=${RED}
+
 function parse_git_branch {
 	git rev-parse --git-dir &> /dev/null
 	git_status="$(git status 2> /dev/null)"
@@ -19,25 +23,25 @@ function parse_git_branch {
 	diverge_pattern="Your branch and (.*) have diverged"
 
 	if [[ ${git_status}} =~ "Changes to be committed" ]]; then
-		state="${GREEN}⚡"
+		state="${cChanges}⚡"
 	fi
 	if [[ ${git_status}} =~ "Changes not staged for commit" ]]; then
-		state=${state}"${RED}⚡"
+		state=${state}"${cUnstaged}⚡"
 	fi
 	# add an else if or two here if you want to get more specific
 	if [[ ${git_status} =~ ${ahead_pattern} ]]; then
-		remote="${YELLOW}↑"
+		remote="${cStdBranch}↑"
 	fi
 	if [[ ${git_status} =~ ${behind_pattern} ]]; then
-		remote="${YELLOW}↓"
+		remote="${cStdBranch}↓"
 	fi
 	if [[ ${git_status} =~ ${diverge_pattern} ]]; then
-		remote="${YELLOW}↕"
+		remote="${cStdBranch}↕"
 	fi
 	if [[ ${git_status} =~ ${branch_pattern} ]]; then
-		branch=${YELLOW}"("${BASH_REMATCH[1]}")"
+		branch=${cStdBranch}"("${BASH_REMATCH[1]}")"
 	elif [[ ${git_status} =~ ${detached_branch_pattern} ]]; then
-		branch="${YELLOW}NO BRANCH"
+		branch="${cStdBranch}NO BRANCH"
 	fi
 
 	if [[ ${#state} -gt "0" || ${#remote} -gt "0" ]]; then
