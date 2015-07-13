@@ -64,12 +64,14 @@ function prompt_func() {
 
     declare -a line1=()
     line1+=("${LIGHT_GRAY}${SYM_CORNER_TL}${SYM_HLINE}")
-    line1+=("${YELLOW}\D{%Y-%m-%d %H:%M} ${GREEN}\u${LIGHT_GREEN}@\h ${LIGHT_BLUE} \w")
+    line1+=("${YELLOW}\D{%Y-%m-%d %H:%M}")
+    line1+=("${GREEN}\u${LIGHT_GREEN}@\h")
+    line1+=($(git_prompt))
     printf -v lines[0] '%s ' "${line1[@]}"
 
     declare -a line2=()
     line2+=("${LIGHT_GRAY}${SYM_CORNER_BL}${SYM_HLINE}${SYM_HLINE}>")
-    line2+=($(git_prompt))
+    line2+=("${LIGHT_BLUE}\w")
     line2+=($(cmd_prompt ${EXIT_STATUS}))
     printf -v lines[1] '%s ' "${line2[@]}"
 
