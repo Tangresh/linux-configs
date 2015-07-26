@@ -33,7 +33,7 @@
 
 (global-whitespace-mode t)
 ;; 'face for more color
-(setq whitespace-style '(face tabs spaces trailing lines space-before-tab indentation empty space-after-tab space-mark tab-mark newline))
+(setq whitespace-style '(face tabs spaces trailing lines space-before-tab indentation empty space-after-tab tab-mark newline))
 (setq whitespace-line 0)
 (set-face-attribute 'whitespace-space nil :background nil :foreground "orange")
 (set-face-attribute 'whitespace-tab nil :background nil :foreground "orange")
@@ -57,6 +57,17 @@
   )
 
 ;; END org-mode
+;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;
+;; BEGIN MELPA
+
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/") t)
+(package-initialize)
+
+;; END MELPA
 ;;;;;;;;;;;;;;;
 
 
