@@ -1,8 +1,5 @@
 [color]
 	ui = auto
-[user]
-	name = Dominik Menzi
-	email = dominik.menzi@inventage.com
 [core]
 	editor = emacs -nw
 	quotepath = false
