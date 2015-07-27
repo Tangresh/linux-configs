@@ -6,3 +6,5 @@ function aurget() {
     prefix=${1:0:2}
     wget https://aur.archlinux.org/packages/$prefix/$1/$1.tar.gz
 }
+
+alias yaourt-clean='yaourt -Rns $(yaourt -Qtqd)'
