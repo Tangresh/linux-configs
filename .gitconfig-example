@@ -1,0 +1,5 @@
+[user]
+    name = Dominik Menzi
+    email = dmenzi@tangresh.ch
+[include]
+    path = configs/.gitconfig
