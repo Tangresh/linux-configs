@@ -75,7 +75,7 @@ function parse_git_branch() {
         statePart="${cChanges}⚡"
     fi
     if [[ ${git_status} =~ "Changes not staged for commit" ]]; then
-        statePart=${state}"${cUnstaged}⚡"
+        statePart=${statePart}"${cUnstaged}⚡"
     fi
     parts+=($statePart)
 
