@@ -53,7 +53,7 @@
 
 (defun todo ()
   (interactive)
-  (find-file "/home/tangresh/TODO/main.org")
+  (find-file "/home/tangresh/ownCloud/TODO/main.org")
   )
 
 ;; END org-mode
