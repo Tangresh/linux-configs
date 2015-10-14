@@ -2,7 +2,7 @@
 alias tiga="tig --all"
 alias gitka="gitk --all &"
 alias qgita="qgit --all &"
-alias gg="qgit --all &"
+alias gg="gitg --all &"
 alias gst="git status"
 alias gai="git add -i"
 # git svn
