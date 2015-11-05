@@ -43,7 +43,7 @@ SYM_HLINE="\342\224\200"
 SYM_CORNER_TL="\342\224\214"
 SYM_CORNER_BL="\342\224\224"
 
-. ~/.gitrc
+. $(dirname $(readlink -f $BASH_SOURCE))/.bashrc-git
 
 function cmd_prompt() {
     declare prompt
