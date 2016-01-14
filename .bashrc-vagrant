@@ -1,0 +1,18 @@
+#!/bin/bash
+
+vagrant-box-cleanup() {
+    if [[ -z $1 ]]
+    then
+        BOXMATCH='[[:alnum:][:punct:]]\+'
+    else
+        BOXMATCH=$1
+    fi
+
+    while read line
+    do
+        vagrant box remove ${line}
+    done < <(
+        vagrant box list \
+            | sed -n "s/^\(${BOXMATCH}\) \+([[:alnum:]]\+, \([[:alnum:][:punct:]]\+\))/\1 --box-version \2/g p"
+    )
+}
