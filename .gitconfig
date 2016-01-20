@@ -53,3 +53,6 @@
 [workflow]
 	upstream = origin/master
 	tracking = master
+[user]
+	name = Dominik Menzi
+	email = dmenzi@tangresh.ch
