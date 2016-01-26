@@ -14,7 +14,8 @@
 
 ;; Color theme
 ;(color-theme-initialize)
-;(color-theme-calm-forest)
+                                        ;(color-theme-calm-forest)
+(load-theme 'tsdh-dark)
 
 (show-paren-mode t)
 (setq show-paren-style 'mixed)
@@ -24,12 +25,12 @@
 (setq-default tab-width 4)
 
 (setq inhibit-startup-message t)
-(custom-set-faces
+;(custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(default ((t (:stipple nil :background "#ffffff" :foreground "#000000" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 90 :width normal :family "adobe-courier")))))
+; '(default ((t (:stipple nil :background "#ffffff" :foreground "#000000" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 90 :width normal :family "adobe-courier")))))
 
 (global-whitespace-mode t)
 ;; 'face for more color
