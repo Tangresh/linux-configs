@@ -1,0 +1,26 @@
+#!/usr/bin/python3
+
+import argparse
+import subprocess
+
+def run_remote(host, args):
+
+    tmpfile_bytes = subprocess.check_output(['ssh', host, 'mktemp'])
+    tmpfile = tmpfile_bytes.decode('utf-8').strip()
+    try:
+        subprocess.check_output(['scp', '-p', args[0], '{host}:{tmpfile}'.format(host=host, tmpfile=tmpfile)])
+        output_b = subprocess.check_output(['ssh', host, tmpfile] + args[1:])
+        output = output_b.decode('utf-8').strip()
+        print(output)
+    finally:
+        subprocess.check_output(['ssh', host, 'rm ' + tmpfile])
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Process some integers.')
+    #parser.add_argument('-f', '--frequency', type=float, help='Frequency to use for reading in Hz')
+    parser.add_argument('host', help='The host connection string')
+    parser.add_argument('args', nargs='+',
+                        help='The scripts to execute on every repetition')
+    args = parser.parse_args()
+
+    run_remote(args.host, args.args)
