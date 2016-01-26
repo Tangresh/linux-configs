@@ -2,6 +2,7 @@
 # ~/.bashrc
 #
 
+PATH=$(dirname $(readlink -f ${BASH_SOURCE}))/bin:$PATH
 PATH=~/bin:$PATH
 export PATH
 
