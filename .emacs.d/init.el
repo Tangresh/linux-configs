@@ -14,8 +14,8 @@
 
 ;; Color theme
 ;(color-theme-initialize)
-                                        ;(color-theme-calm-forest)
-(load-theme 'tsdh-dark)
+;(color-theme-calm-forest)
+(load-theme 'wheatgrass)
 
 (show-paren-mode t)
 (setq show-paren-style 'mixed)
@@ -36,8 +36,8 @@
 ;; 'face for more color
 (setq whitespace-style '(face tabs spaces trailing lines space-before-tab indentation empty space-after-tab tab-mark newline))
 (setq whitespace-line 0)
-(set-face-attribute 'whitespace-space nil :background nil :foreground "orange")
-(set-face-attribute 'whitespace-tab nil :background nil :foreground "orange")
+(set-face-attribute 'whitespace-space nil :background "black" :foreground "orange")
+(set-face-attribute 'whitespace-tab nil :background "black" :foreground "orange")
 
 ;; END styling ;;
 ;;;;;;;;;;;;;;;;;
