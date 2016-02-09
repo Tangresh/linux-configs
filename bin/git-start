@@ -1,0 +1,11 @@
+#!/bin/bash -e
+
+curBranch=$(git symbolic-ref HEAD)
+upstreamBranch=$(git for-each-ref --format='%(upstream)' ${curBranch})
+
+if [ -z $upstreamBranch ]
+then
+    upstreamBranch=$(git config workflow.upstream)
+fi
+
+git checkout ${upstreamBranch} -b $@

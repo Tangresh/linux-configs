@@ -1,0 +1,21 @@
+#!/bin/bash -e
+
+curBranch=$(git symbolic-ref HEAD)
+curBranchAbbrev=$(git rev-parse --abbrev-ref ${curBranch})
+trap "git checkout ${curBranchAbbrev}" EXIT
+
+upstreamBranch=$(git for-each-ref --format='%(upstream)' ${curBranch})
+
+if [ -z $upstreamBranch ]
+then
+    echo "No upstream branch set" >2
+    exit 1
+fi
+
+trackingBranch=$(git for-each-ref --format='%(refname:strip=3)' ${upstreamBranch})
+
+git checkout ${trackingBranch}
+git rebase ${upstreamBranch} --preserve-merges
+git branch -d ${curBranchAbbrev}
+
+trap "" EXIT
