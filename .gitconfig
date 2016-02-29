@@ -18,12 +18,13 @@
 	cp = cherry-pick
 	done = !git-done
 	ff = merge --ff
+	fixup = !sh -c 'git commit -m \"fixup! $(git log -1 --format='\\''%s'\\'' $@ | sed \"s/fixup\\! //\")\"' -
 	ign = ls-files -o -i --exclude-standard
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
 	rb = rebase --preserve-merges
 	rba = rebase --abort
 	rbc = rebase --continue
-	rbi = rebase --interactive
+	rbi = rebase --interactive --autosquash
 	r = reset
 	r1 = reset HEAD^
 	r2 = reset HEAD^^
