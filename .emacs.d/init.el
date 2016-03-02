@@ -74,8 +74,8 @@
 ;;;;;;;;;;;;;;;;;
 ;; BEGIN Company
 
-;; Enable company globally for all mode
-(global-company-mode)
+;; Enable company globally for all modes
+;;(global-company-mode)
 
 ;; Reduce the time after which the company auto completion popup opens
 (setq company-idle-delay 0.2)
