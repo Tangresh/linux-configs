@@ -1,5 +1,4 @@
-#
-# ~/.bashrc
-#
+# If not running interactively, stop here
+[[ $- != *i* ]] && return
 
 eval "$(rbenv init -)"

@@ -1,3 +1,6 @@
+# If not running interactively, stop here
+[[ $- != *i* ]] && return
+
 # git aliases
 alias tiga="tig --all"
 alias gitka="gitk --all &"

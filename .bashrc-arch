@@ -1,6 +1,5 @@
-#
-# ~/.bashrc
-#
+# If not running interactively, stop here
+[[ $- != *i* ]] && return
 
 function aurget() {
     wget https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz

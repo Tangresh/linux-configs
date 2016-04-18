@@ -1,6 +1,9 @@
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 ssh-add 2> /dev/null
 
+# If not running interactively, stop here
+[[ $- != *i* ]] && return
+
 alias ssh-anon="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 alias scp-anon="scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 

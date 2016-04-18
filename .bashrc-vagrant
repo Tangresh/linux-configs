@@ -1,4 +1,5 @@
-#!/bin/bash
+# If not running interactively, stop here
+[[ $- != *i* ]] && return
 
 vagrant-box-cleanup() {
     if [[ -z $1 ]]
