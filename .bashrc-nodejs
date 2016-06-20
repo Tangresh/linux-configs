@@ -1,10 +1,12 @@
 # If not running interactively, stop here
 [[ $- != *i* ]] && return
 
+# set prefix for n, the npm version manager
+export N_PREFIX=~/.n
+PATH="$N_PREFIX/bin:$PATH"
+
 # set prefix for global node modules folder
 export npm_config_prefix=~/.node_modules
 PATH="$npm_config_prefix/bin:$PATH"
 
-# set prefix for n, the npm version manager
-export N_PREFIX=~/.n
-PATH="$N_PREFIX/bin:$PATH"
+[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
