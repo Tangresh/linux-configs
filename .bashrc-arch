@@ -5,4 +5,4 @@ function aurget() {
     wget https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz
 }
 
-alias yaourt-clean='yaourt -Rns $(yaourt -Qtqd)'
+alias pacaur-clean='pacaur -Rns $(pacaur -Qtqd)'
