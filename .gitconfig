@@ -32,7 +32,7 @@
 	s = status -sb
 	st = status
 	start = !git-start
-	wdiff = diff --word-diff
+	wdiff = diff --word-diff --word-diff-regex=[^[:space:].]
 [merge]
 	ff = false
 	conflictstyle = diff3
